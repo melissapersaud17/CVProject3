@@ -17,6 +17,8 @@ class ImageProcessing{
 	    int **outAry;
 	    int **thrAry;
 
+        int ***mask;
+
     
     public:
 
@@ -43,6 +45,11 @@ class ImageProcessing{
         //loadImage method
         void loadImage(ifstream& inFile1);
 
+        //mirror framing method
+        void mirrorFraming();
+
+        //loadMask method
+        void loadMask();
 
 
 

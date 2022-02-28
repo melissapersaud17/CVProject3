@@ -81,15 +81,12 @@ int main(int argc, char *argv[]){
     }
     ip.setThrArray(thresholdArry);
 
-
+    //calling the loadImage method
     ip.loadImage(inFile1);
-    for(int rows=0; rows < rows; rows++){
-        for(int cols=0; cols < columns; cols++){
-           cout << frameArry[rows][columns] << " ";
-        }
-        cout << endl;
-    }
 
+    ip.mirrorFraming();
+
+    ip.loadMask();
 
 
 
