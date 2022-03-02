@@ -51,6 +51,9 @@ class ImageProcessing{
         //loadMask method
         void loadMask();
 
+        //readMask method
+        void readMask(int array, string maskString);
+
 
 
 

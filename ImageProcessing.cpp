@@ -162,9 +162,8 @@ void ImageProcessing::mirrorFraming(){
 //loadMask method
 void ImageProcessing::loadMask(){
     //[8][5][5] 8 rows, 5 columns, 5 elements inside
-
+    //creating the mask array
     mask = new int**[8];
-
     for (int i = 0; i < 8; i++) {
         mask[i] = new int*[5];
  
@@ -173,52 +172,41 @@ void ImageProcessing::loadMask(){
         }
     }
 
-    
+    readMask(0,"mask1.txt");
 
-    int maskArray[8][5][5] = {
-        { {3, 4, 2, 3, 5}, {0, -3, 9, 11, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5} },
-        { {3, 4, 2, 3, 5}, {0, -3, 9, 11, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5} },
-        { {3, 4, 2, 3, 5}, {0, -3, 9, 11, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5} },
-        { {3, 4, 2, 3, 5}, {0, -3, 9, 11, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5} },
-        { {3, 4, 2, 3, 5}, {0, -3, 9, 11, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5} },
-        { {3, 4, 2, 3, 5}, {0, -3, 9, 11, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5} },
-        { {3, 4, 2, 3, 5}, {0, -3, 9, 11, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5} },
-        { {3, 4, 2, 3, 5}, {0, -3, 9, 11, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5}, {23, 12, 23, 2, 5} },
-    };
+}
 
-    //mask = maskArray;
+void ImageProcessing::readMask(int array, string maskString){
+    ifstream maskFile;
+    maskFile.open(maskString);
 
-    mask[0][0][0] = {3};
+    istringstream iss;
+    string line;
+    int number;
+    int rows = 0;
+    int columns = 0;
 
+    if(maskFile.is_open()){
+        //ignore the first line because we already have the size of the array's and values will 
+        //only be composed of 1's and 0's
 
-     for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 5; j++) {
-            for (int k = 0; k < 5; k++) {
- 
-                // Assign values to the
-                // memory blocks created
-                cout << mask[i][j][k] << " ";
+        getline(maskFile, line);
+
+        while(!maskFile.eof()){
+            getline(maskFile, line);
+
+            iss.clear();
+            iss.str(line);
+
+            while(iss >> number){ 
+                mask[array][rows][columns] = number;
+                //cout << mask[0][rows][columns] << " ";
+                columns++;
             }
-            cout << endl;
-        }
-        cout << endl;
+            rows++;
+            //cout << endl;
+        }                   
     }
-
-//    int test[2][3][4] = {3, 4, 2, 3, 0, -3, 9, 11, 23, 12, 23, 
-//                  2, 13, 4, 56, 3, 5, 9, 3, 5, 5, 1, 4, 9};
-//     //Mask1: 
-    // this->mask = { 
-    //         { {3, 4, 2, 3}, {0, -3, 9, 11}, {23, 12, 23, 2}, {23, 12, 23, 2}, {23, 12, 23, 2} },
-    //         { {3, 4, 2, 3}, {0, -3, 9, 11}, {23, 12, 23, 2}, {23, 12, 23, 2}, {23, 12, 23, 2} },
-    //         { {3, 4, 2, 3}, {0, -3, 9, 11}, {23, 12, 23, 2}, {23, 12, 23, 2}, {23, 12, 23, 2} },
-    //         { {3, 4, 2, 3}, {0, -3, 9, 11}, {23, 12, 23, 2}, {23, 12, 23, 2}, {23, 12, 23, 2} },
-
-    //         { {3, 4, 2, 3}, {0, -3, 9, 11}, {23, 12, 23, 2}, {23, 12, 23, 2}, {23, 12, 23, 2} },
-    //         { {3, 4, 2, 3}, {0, -3, 9, 11}, {23, 12, 23, 2}, {23, 12, 23, 2}, {23, 12, 23, 2} },
-    //         { {3, 4, 2, 3}, {0, -3, 9, 11}, {23, 12, 23, 2}, {23, 12, 23, 2}, {23, 12, 23, 2} },
-    //         { {3, 4, 2, 3}, {0, -3, 9, 11}, {23, 12, 23, 2}, {23, 12, 23, 2}, {23, 12, 23, 2} },
-    //     };
-
 
 
 }
