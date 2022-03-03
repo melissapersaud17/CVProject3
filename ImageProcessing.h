@@ -18,8 +18,6 @@ class ImageProcessing{
 	    int **thrAry;
 
         int ***mask;
-
-    
     public:
 
         //setter methods for rows, columns, min and max
@@ -27,6 +25,10 @@ class ImageProcessing{
         void setCols(int cols);
         void setMin(int min);
         void setMax(int max);
+
+        //getter methods for the min and max values
+        int getMin();
+        int getMax();
 
         //getter methods for rows and columns
         int getRows();
@@ -51,14 +53,15 @@ class ImageProcessing{
         //loadMask method
         void loadMask();
 
-        //readMask method
-        void readMask(int array, string maskString);
+        //imgReformat method 
+        void imgReformat(int **inAry, int newMin, int newMax, ofstream& outFile1);
 
+        //threshold method
+        void threshold(int **outArray, int **thresholdAry, int thresholdVal);
 
-
-
-
-};
+        //cornerPreserveAvg method
+        void cornerPreserveAvg();
+};      
 
 
 

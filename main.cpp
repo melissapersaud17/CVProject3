@@ -14,15 +14,15 @@ int main(int argc, char *argv[]){
     string file1 = argv[1];
     ifstream inFile1;
     inFile1.open(file1);
-
+    
     //Obtaining the threshold value
     int thresholdValue = atoi (argv[2]);
     ip.setThreshold(thresholdValue);
 
     //outFile 1
-    // string outFile_1 = argv[3];
-    // ofstream outFile1;
-    // outFile1.open(outFile_1);
+    string outFile_1 = argv[3];
+    ofstream outFile1;
+    outFile1.open(outFile_1);
 
     // //outFile 2
     // string outFile_2 = argv[4];
@@ -88,18 +88,11 @@ int main(int argc, char *argv[]){
 
     ip.loadMask();
 
+    ip.imgReformat(frameArry, ip.getMin(), ip.getMax(), outFile1);
 
+    ip.threshold(frameArry, thresholdArry, thresholdValue);
 
-
-
-
-
-
-   
-
-
-
-
+    ip.imgReformat(thresholdArry, 0, 1, outFile1);
 
     return 0;
 }

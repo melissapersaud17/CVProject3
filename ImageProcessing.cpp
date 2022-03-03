@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 using namespace std;
 
 //setter methods for rows, columns, minVal and MaxVal
@@ -20,6 +21,16 @@ void ImageProcessing::setMin(int min){
 void ImageProcessing::setMax(int max){
     this->maxVal = max;
 }
+
+//getter methods for min and max values
+int ImageProcessing::getMin(){
+    return this->minVal;
+}
+
+int ImageProcessing::getMax(){
+    return this->maxVal;
+}
+
 
 //getter methods for rows and cols
 int ImageProcessing::getRows(){
@@ -172,71 +183,304 @@ void ImageProcessing::loadMask(){
         }
     }
 
-    readMask(0,"mask1.txt");
-    readMask(1,"mask2.txt");
-    // readMask(2,"mask3.txt");
-    // readMask(3,"mask4.txt");
-    // readMask(4,"mask5.txt");
-    // readMask(5,"mask6.txt");
-    // readMask(6,"mask7.txt");
-    // readMask(7,"mask8.txt");
+    //mask1
+    mask[0][0][0] = 0;
+    mask[0][0][1] = 0;
+    mask[0][0][2] = 0; 
+    mask[0][0][3] = 0; 
+    mask[0][0][4] = 0;
 
+    mask[0][1][0] = 0;
+    mask[0][1][1] = 0;
+    mask[0][1][2] = 0; 
+    mask[0][1][3] = 0; 
+    mask[0][1][4] = 0;
 
-    for(int a = 0 ; a < 8; a++){
-        for(int i = 0; i < 5; i++){
-            for(int x = 0; x < 5; x++){
-                cout << mask[a][i][x] << " ";
+    mask[0][2][0] = 0;
+    mask[0][2][1] = 0;
+    mask[0][2][2] = 1; 
+    mask[0][2][3] = 0; 
+    mask[0][2][4] = 0;
+
+    mask[0][3][0] = 0;
+    mask[0][3][1] = 1;
+    mask[0][3][2] = 1; 
+    mask[0][3][3] = 1; 
+    mask[0][3][4] = 0;
+
+    mask[0][4][0] = 1;
+    mask[0][4][1] = 1;
+    mask[0][4][2] = 1; 
+    mask[0][4][3] = 1; 
+    mask[0][4][4] = 1;
+
+    //mask 2
+    mask[1][0][0] = 1;
+    mask[1][0][1] = 0;
+    mask[1][0][2] = 0; 
+    mask[1][0][3] = 0; 
+    mask[1][0][4] = 0;
+
+    mask[1][1][0] = 1;
+    mask[1][1][1] = 1;
+    mask[1][1][2] = 0; 
+    mask[1][1][3] = 0; 
+    mask[1][1][4] = 0;
+
+    mask[1][2][0] = 1;
+    mask[1][2][1] = 1;
+    mask[1][2][2] = 1; 
+    mask[1][2][3] = 0; 
+    mask[1][2][4] = 0;
+
+    mask[1][3][0] = 1;
+    mask[1][3][1] = 1;
+    mask[1][3][2] = 0; 
+    mask[1][3][3] = 0; 
+    mask[1][3][4] = 0;
+
+    mask[1][4][0] = 1;
+    mask[1][4][1] = 0;
+    mask[1][4][2] = 0; 
+    mask[1][4][3] = 0; 
+    mask[1][4][4] = 0;
+
+    //mask 3
+    mask[2][0][0] = 1;
+    mask[2][0][1] = 1;
+    mask[2][0][2] = 1; 
+    mask[2][0][3] = 1; 
+    mask[2][0][4] = 1;
+
+    mask[2][1][0] = 0;
+    mask[2][1][1] = 1;
+    mask[2][1][2] = 1; 
+    mask[2][1][3] = 1; 
+    mask[2][1][4] = 0;
+
+    mask[2][2][0] = 0;
+    mask[2][2][1] = 0;
+    mask[2][2][2] = 1; 
+    mask[2][2][3] = 0; 
+    mask[2][2][4] = 0;
+
+    mask[2][3][0] = 0;
+    mask[2][3][1] = 0;
+    mask[2][3][2] = 0; 
+    mask[2][3][3] = 0; 
+    mask[2][3][4] = 0;
+    
+    mask[2][4][0] = 0;
+    mask[2][4][1] = 0;
+    mask[2][4][2] = 0; 
+    mask[2][4][3] = 0; 
+    mask[2][4][4] = 0;
+
+    //mask4
+    mask[3][0][0] = 0;
+    mask[3][0][1] = 0;
+    mask[3][0][2] = 0; 
+    mask[3][0][3] = 0; 
+    mask[3][0][4] = 1;
+
+    mask[3][1][0] = 0;
+    mask[3][1][1] = 0;
+    mask[3][1][2] = 0; 
+    mask[3][1][3] = 1; 
+    mask[3][1][4] = 1;
+
+    mask[3][2][0] = 0;
+    mask[3][2][1] = 0;
+    mask[3][2][2] = 1; 
+    mask[3][2][3] = 1; 
+    mask[3][2][4] = 1;
+
+    mask[3][3][0] = 0;
+    mask[3][3][1] = 0;
+    mask[3][3][2] = 0; 
+    mask[3][3][3] = 1; 
+    mask[3][3][4] = 1;
+    
+    mask[3][4][0] = 0;
+    mask[3][4][1] = 0;
+    mask[3][4][2] = 0; 
+    mask[3][4][3] = 0; 
+    mask[3][4][4] = 1;
+
+    //mask5
+    mask[4][0][0] = 1;
+    mask[4][0][1] = 1;
+    mask[4][0][2] = 1; 
+    mask[4][0][3] = 0; 
+    mask[4][0][4] = 0;
+
+    mask[4][1][0] = 1;
+    mask[4][1][1] = 1;
+    mask[4][1][2] = 1; 
+    mask[4][1][3] = 0; 
+    mask[4][1][4] = 0;
+
+    mask[4][2][0] = 1;
+    mask[4][2][1] = 1;
+    mask[4][2][2] = 1; 
+    mask[4][2][3] = 0; 
+    mask[4][2][4] = 0;
+
+    mask[4][3][0] = 0;
+    mask[4][3][1] = 0;
+    mask[4][3][2] = 0; 
+    mask[4][3][3] = 0; 
+    mask[4][3][4] = 0;
+    
+    mask[4][4][0] = 0;
+    mask[4][4][1] = 0;
+    mask[4][4][2] = 0; 
+    mask[4][4][3] = 0; 
+    mask[4][4][4] = 0;
+
+    //mask6
+    mask[5][0][0] = 0;
+    mask[5][0][1] = 0;
+    mask[5][0][2] = 1; 
+    mask[5][0][3] = 1; 
+    mask[5][0][4] = 1;
+
+    mask[5][1][0] = 0;
+    mask[5][1][1] = 0;
+    mask[5][1][2] = 1; 
+    mask[5][1][3] = 1; 
+    mask[5][1][4] = 1;
+
+    mask[5][2][0] = 0;
+    mask[5][2][1] = 0;
+    mask[5][2][2] = 1; 
+    mask[5][2][3] = 1; 
+    mask[5][2][4] = 1;
+
+    mask[5][3][0] = 0;
+    mask[5][3][1] = 0;
+    mask[5][3][2] = 0; 
+    mask[5][3][3] = 0; 
+    mask[5][3][4] = 0;
+    
+    mask[5][4][0] = 0;
+    mask[5][4][1] = 0;
+    mask[5][4][2] = 0; 
+    mask[5][4][3] = 0; 
+    mask[5][4][4] = 0;
+
+    //mask7
+    mask[6][0][0] = 0;
+    mask[6][0][1] = 0;
+    mask[6][0][2] = 0; 
+    mask[6][0][3] = 0; 
+    mask[6][0][4] = 0;
+
+    mask[6][1][0] = 0;
+    mask[6][1][1] = 0;
+    mask[6][1][2] = 0; 
+    mask[6][1][3] = 0; 
+    mask[6][1][4] = 0;
+
+    mask[6][2][0] = 0;
+    mask[6][2][1] = 0;
+    mask[6][2][2] = 1; 
+    mask[6][2][3] = 1; 
+    mask[6][2][4] = 1;
+
+    mask[6][3][0] = 0;
+    mask[6][3][1] = 0;
+    mask[6][3][2] = 1; 
+    mask[6][3][3] = 1; 
+    mask[6][3][4] = 1;
+    
+    mask[6][4][0] = 0;
+    mask[6][4][1] = 0;
+    mask[6][4][2] = 1; 
+    mask[6][4][3] = 1; 
+    mask[6][4][4] = 1;
+
+    //mask8
+    mask[7][0][0] = 0;
+    mask[7][0][1] = 0;
+    mask[7][0][2] = 0; 
+    mask[7][0][3] = 0; 
+    mask[7][0][4] = 0;
+
+    mask[7][1][0] = 0;
+    mask[7][1][1] = 0;
+    mask[7][1][2] = 0; 
+    mask[7][1][3] = 0; 
+    mask[7][1][4] = 0;
+
+    mask[7][2][0] = 1;
+    mask[7][2][1] = 1;
+    mask[7][2][2] = 1; 
+    mask[7][2][3] = 0; 
+    mask[7][2][4] = 0;
+
+    mask[7][3][0] = 1;
+    mask[7][3][1] = 1;
+    mask[7][3][2] = 1; 
+    mask[7][3][3] = 0; 
+    mask[7][3][4] = 0;
+    
+    mask[7][4][0] = 1;
+    mask[7][4][1] = 1;
+    mask[7][4][2] = 1; 
+    mask[7][4][3] = 0; 
+    mask[7][4][4] = 0;
+}
+
+void ImageProcessing::imgReformat(int **inAry, int newMin, int newMax, ofstream& outFile1){
+
+    if(outFile1.is_open()){
+        outFile1 << numRows << " "  << numCols << " " << newMin << " " << newMax << endl;
+
+        string str = to_string(newMax);
+        int width = str.length();
+
+        int r = 1;
+
+        while(r <= numRows + 2){
+        int c = 1;
+            while(c <= numCols + 2 ){
+                outFile1 << inAry[r][c];
+                str = to_string(inAry[r][c]);
+                int ww = str.length();
+
+                while(ww < width){
+                    outFile1 << " ";
+                    ww++;
+                }
+                c++;
             }
-            cout << endl;
+            r++;
         }
-        cout << endl;
+
     }
-        
 
 }
 
-void ImageProcessing::readMask(int arrayNumber, string maskString){
-
-    ifstream maskFile;
-    maskFile.open(maskString);
-
-    istringstream iss;
-    string line;
-    int number;
-
-    int rows = 0;
-    int columns = 0;
-
-    //cout << "rows and columns " << rows << " " << columns << endl;
-
-    if(maskFile.is_open()){
-        //ignore the first line because we already have the size of the array's and values will 
-        //only be composed of 1's and 0's
-        getline(maskFile, line);
-
-        //cout << line << endl;
-
-        while(!maskFile.eof()){
-            //gets row0
-            getline(maskFile, line);
-
-            iss.clear();
-            iss.str(line);
-
-            //cout << line;
-
-            while(iss >> number){ 
-                this->mask[arrayNumber][rows][columns] = number;
-                //cout << this->mask[arrayNumber][rows][columns] << " ";
-                columns++;
+//theshold method
+void ImageProcessing::threshold(int **outArray, int **thresholdAry, int thresholdVal){
+    for(int i = 0; i < numRows + 4; i++){
+        for(int j = 0; j < numCols + 4; j++){
+            if(outArray[i][j] >= thresholdVal){
+                thresholdAry[i][j] = 1;
+            }else{
+                thresholdAry[i][j] = 0;
             }
-            rows++;
-            //cout << endl;
-        }                   
+        }
     }
-    maskFile.close();
-
 }
 
+// //cornerPreserveAvg method
+// void ImageProcessing::cornerPreserveAvg(){
+//     int r = 2;
+//     int c = 2;
+//     int maskIndex = 0;
+//     int minAvg = frameAry[r][c];
+//     int minDiff = 9999;
 
-
+// }
