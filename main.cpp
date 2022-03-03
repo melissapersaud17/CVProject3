@@ -20,14 +20,14 @@ int main(int argc, char *argv[]){
     ip.setThreshold(thresholdValue);
 
     //outFile 1
-    string outFile_1 = argv[3];
-    ofstream outFile1;
-    outFile1.open(outFile_1);
+    // string outFile_1 = argv[3];
+    // ofstream outFile1;
+    // outFile1.open(outFile_1);
 
-    //outFile 2
-    string outFile_2 = argv[4];
-    ofstream outFile2;
-    outFile2.open(outFile_2);
+    // //outFile 2
+    // string outFile_2 = argv[4];
+    // ofstream outFile2;
+    // outFile2.open(outFile_2);
 
     //read in numRows, numCols, minVal, maxVal
     int *imageHeader = new int[4]();

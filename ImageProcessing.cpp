@@ -173,41 +173,68 @@ void ImageProcessing::loadMask(){
     }
 
     readMask(0,"mask1.txt");
+    readMask(1,"mask2.txt");
+    // readMask(2,"mask3.txt");
+    // readMask(3,"mask4.txt");
+    // readMask(4,"mask5.txt");
+    // readMask(5,"mask6.txt");
+    // readMask(6,"mask7.txt");
+    // readMask(7,"mask8.txt");
+
+
+    for(int a = 0 ; a < 8; a++){
+        for(int i = 0; i < 5; i++){
+            for(int x = 0; x < 5; x++){
+                cout << mask[a][i][x] << " ";
+            }
+            cout << endl;
+        }
+        cout << endl;
+    }
+        
 
 }
 
-void ImageProcessing::readMask(int array, string maskString){
+void ImageProcessing::readMask(int arrayNumber, string maskString){
+
     ifstream maskFile;
     maskFile.open(maskString);
 
     istringstream iss;
     string line;
     int number;
+
     int rows = 0;
     int columns = 0;
+
+    //cout << "rows and columns " << rows << " " << columns << endl;
 
     if(maskFile.is_open()){
         //ignore the first line because we already have the size of the array's and values will 
         //only be composed of 1's and 0's
-
         getline(maskFile, line);
 
+        //cout << line << endl;
+
         while(!maskFile.eof()){
+            //gets row0
             getline(maskFile, line);
 
             iss.clear();
             iss.str(line);
 
+            //cout << line;
+
             while(iss >> number){ 
-                mask[array][rows][columns] = number;
-                //cout << mask[0][rows][columns] << " ";
+                this->mask[arrayNumber][rows][columns] = number;
+                //cout << this->mask[arrayNumber][rows][columns] << " ";
                 columns++;
             }
             rows++;
             //cout << endl;
         }                   
     }
-
+    maskFile.close();
 
 }
 
