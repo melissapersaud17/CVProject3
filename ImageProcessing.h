@@ -44,6 +44,10 @@ class ImageProcessing{
         void setOutArray(int **out);
         void setThrArray(int **thr);
 
+        void getFrameArray();
+        void getThrArray();
+        void getoutArray();
+
         //loadImage method
         void loadImage(ifstream& inFile1);
 
@@ -61,6 +65,8 @@ class ImageProcessing{
 
         //cornerPreserveAvg method
         void cornerPreserveAvg();
+
+        int convolution5x5(int r, int c, int maskIndex);
 };      
 
 

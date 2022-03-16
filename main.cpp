@@ -24,10 +24,10 @@ int main(int argc, char *argv[]){
     ofstream outFile1;
     outFile1.open(outFile_1);
 
-    // //outFile 2
-    // string outFile_2 = argv[4];
-    // ofstream outFile2;
-    // outFile2.open(outFile_2);
+    //outFile 2
+    string outFile_2 = argv[4];
+    ofstream outFile2;
+    outFile2.open(outFile_2);
 
     //read in numRows, numCols, minVal, maxVal
     int *imageHeader = new int[4]();
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]){
     ip.setOutArray(outputArry);
 
     //dynamically allocate thrAry
-    int **thresholdArry = new int*[rows];\
+    int **thresholdArry = new int*[rows];
     for(int i=0; i < rows; i++){
         thresholdArry[i] = new int[columns];
     }
@@ -93,6 +93,26 @@ int main(int argc, char *argv[]){
     ip.threshold(frameArry, thresholdArry, thresholdValue);
 
     ip.imgReformat(thresholdArry, 0, 1, outFile1);
+    
+    ip.cornerPreserveAvg();
+    
+    ip.imgReformat(outputArry, ip.getMin(), ip.getMax(), outFile1);
+
+    ip.threshold(outputArry, thresholdArry, thresholdValue);
+
+    ip.imgReformat(thresholdArry, 0, 1, outFile1);
+
+    outFile2 << ip.getRows() << " " << ip.getCols() << " " << 0 << " " << 1 << endl;
+    for(int r = 0; r < rows; r++){
+        for(int c = 0; c < columns; c++){
+            outFile2 << thresholdArry[r][c] << " ";
+        }
+        outFile2 << endl;
+    }
+
+    inFile1.close();
+    outFile1.close();
+    outFile2.close();
 
     return 0;
 }

@@ -55,12 +55,43 @@ void ImageProcessing::setFrameArray(int **frame){
     this->frameAry = frame;
 }
 
+void ImageProcessing::getFrameArray(){
+    for (int i = 0; i < numRows+4; i++){
+        for (int x = 0; x < numCols + 4; x++){
+            cout << frameAry[i][x] << " ";
+        }
+        cout << endl;
+        /* code */
+    }
+    
+}
+
 void ImageProcessing::setOutArray(int **out){
     this->outAry = out;
 }
 
 void ImageProcessing::setThrArray(int **thr){
     this->thrAry = thr;
+}
+
+void ImageProcessing::getThrArray(){
+   for (int i = 0; i < numRows+4; i++){
+        for (int x = 0; x < numCols + 4; x++){
+            cout << thrAry[i][x] << " ";
+        }
+        cout << endl;
+        /* code */
+    } 
+}
+
+void ImageProcessing::getoutArray(){
+    for(int i =0; i < numRows + 4; i++){
+        for(int x = 0; x < numCols + 4; x++){
+            cout << outAry[i][x] << " ";
+        }
+
+        cout << endl;
+    }
 }
 
 //loadImage methd
@@ -442,9 +473,9 @@ void ImageProcessing::imgReformat(int **inAry, int newMin, int newMax, ofstream&
 
         int r = 1;
 
-        while(r <= numRows + 2){
+        while(r <= numRows +2 ){
         int c = 1;
-            while(c <= numCols + 2 ){
+            while(c <= numCols+2 ){
                 outFile1 << inAry[r][c];
                 str = to_string(inAry[r][c]);
                 int ww = str.length();
@@ -455,6 +486,7 @@ void ImageProcessing::imgReformat(int **inAry, int newMin, int newMax, ofstream&
                 }
                 c++;
             }
+            outFile1 << endl;
             r++;
         }
 
@@ -475,12 +507,54 @@ void ImageProcessing::threshold(int **outArray, int **thresholdAry, int threshol
     }
 }
 
-// //cornerPreserveAvg method
-// void ImageProcessing::cornerPreserveAvg(){
-//     int r = 2;
-//     int c = 2;
-//     int maskIndex = 0;
-//     int minAvg = frameAry[r][c];
-//     int minDiff = 9999;
+//cornerPreserveAvg method
+void ImageProcessing::cornerPreserveAvg(){
+    int r = 2;
+    int c = 2;
+    
 
-// }
+    while( r < numRows + 2){
+        while(c < numCols + 2){
+            int maskIndex = 0;  //starting with mask 0
+            int minAvg = frameAry[r][c];  //looking at frameAry[2][2]
+            int minDiff = 9999;
+
+            while(maskIndex < 8){
+                int result = convolution5x5(r,c,maskIndex) / 9;
+
+                int diff = abs(result - frameAry[r][c]);
+
+                if(diff < minDiff){
+                    minDiff = diff;
+                    minAvg = result;
+                }
+                maskIndex++;
+            }
+
+            outAry[r][c] = minAvg;
+            c++; 
+        }
+        r++;
+        c = 2;
+    }
+
+}
+
+int ImageProcessing::convolution5x5(int r, int c, int maskIndex){
+    int average = 0;
+    int rowStart = r - 2;
+    int colStart = c - 2;
+    int col = c;
+    for (int i = 0; i < 5; i++){
+        for (int j = 0; j < 5; j++){
+        
+        if (mask[maskIndex][i][j] == 1){
+            average += frameAry[rowStart][colStart];
+        }
+        colStart++;
+    }
+    rowStart++;
+    colStart = c - 2;
+    }
+    return average;
+}
